@@ -10,9 +10,12 @@ import (
 func main() {
 
 	args := os.Args[1:]
-	i, _ := strconv.Atoi(args[0])
-	s, _ := zerandom.Random(i)
+	seed, _ := strconv.Atoi(args[0])
+	freq, _ := strconv.Atoi(args[1])
 
-	fmt.Println(s)
+	for i := 0; i < freq; i++ {
+		s, _ := zerandom.Random(seed + i)
+		fmt.Println(i+1, "-> ", s)
+	}
 
 }
