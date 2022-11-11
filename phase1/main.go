@@ -42,10 +42,19 @@ func greet() {
 	pkga.Prefix = "John Cena"
 	pkga.Echo("Hello")
 	fmt.Println(name, age, mark)
+	pkga.Postfix = "asdfj"
 
 	// default val of err is nil which indicates no error
 	//var defaultErr error
 	//fmt.Println("defaultErr", defaultErr)
+
+	i := []int{10, 20, 30}
+	b := i[2:3]
+
+	b = append(b, 10, 20, 30, 40)
+
+	fmt.Println("i", cap(i))
+	fmt.Println("b", cap(b))
 
 }
 
