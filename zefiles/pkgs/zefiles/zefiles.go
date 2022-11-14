@@ -22,13 +22,18 @@ func New(filename string) (*zefile, error) {
 	return &zefile{filename: filename}, nil
 }
 
-func (z zefile) Read() error {
-	sometype, err := os.ReadFile(z.filename)
+func (z zefile) Read() ([]byte, error) {
+	somebytes, err := os.ReadFile(z.filename)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	fmt.Println(string(sometype))
+	fmt.Println(string(somebytes))
 
-	return nil
+	return somebytes, nil
+}
+
+func (z zefile) Write(text string) error {
+	err := os.WriteFile(z.filename, []byte(text), 6)
+	return err
 }

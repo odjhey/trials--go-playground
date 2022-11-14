@@ -10,8 +10,9 @@ func main() {
 
 	const testfile = "testfile.txt"
 
-	reader, _ := zefiles.New(testfile)
+	rwer, _ := zefiles.New(testfile)
 
-	reader.Read()
+	rwer.Read()
+	rwer.Write("Hello another")
 
 }
