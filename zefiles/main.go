@@ -37,6 +37,7 @@ func main() {
 		return
 	}
 
+	// eof was read, q: how to put back the cursor to the beginning?
 	rbytes2, err := hfile.Read()
 	if err != nil {
 		fmt.Println(err)
