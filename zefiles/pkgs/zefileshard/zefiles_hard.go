@@ -1,8 +1,6 @@
 package zefileshard
 
 import (
-	"fmt"
-	"log"
 	"os"
 )
 
@@ -17,32 +15,35 @@ type zefileHard struct {
 }
 
 func New(filename string) (*zefileHard, error) {
-	return &zefileHard{filename: filename}, nil
-}
 
-func (z *zefileHard) Read() ([]byte, error) {
-
-	var err error
-	z.file, err = os.Open(z.filename)
+	file, err := os.OpenFile(filename, os.O_RDWR, 0777)
 	if err != nil {
 		return nil, err
 	}
+
+	return &zefileHard{filename: filename, file: file}, nil
+}
+
+func (z *zefileHard) Read() ([]byte, error) {
 
 	info, err := z.file.Stat()
 	if err != nil {
 		return nil, err
 	}
 
-	fmt.Println("asdlkfj", info.Size())
 	byteSlice := make([]byte, info.Size())
 	_, err = z.file.Read(byteSlice)
 	if err != nil {
 		return nil, err
 	}
 
-	log.Printf("Data read: %s\n", byteSlice)
-
 	return byteSlice, nil
+}
+
+func (z *zefileHard) Write(input string) error {
+	_, err := z.file.Write([]byte(input))
+
+	return err
 }
 
 func (z *zefileHard) Close() error {

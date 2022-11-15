@@ -17,14 +17,31 @@ func main() {
 		rwer.Write("Hello another")
 	*/
 
-	hfile, _ := zefileshard.New(testfile)
+	hfile, err := zefileshard.New(testfile)
+	if err != nil {
+		fmt.Println("Error")
+		return
+	}
+	defer hfile.Close()
 
 	rbytes, err := hfile.Read()
 	if err != nil {
 		fmt.Println("Error")
+		return
 	}
-	defer hfile.Close()
+	fmt.Printf("%s\n", rbytes)
 
-	fmt.Printf("%s", rbytes)
+	err = hfile.Write("John Cena!")
+	if err != nil {
+		fmt.Println("Write Error")
+		return
+	}
+
+	rbytes2, err := hfile.Read()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Printf("%s\n", rbytes2)
 
 }
