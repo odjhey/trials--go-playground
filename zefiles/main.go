@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"zefiles/pkgs/zefiles"
+	"zefiles/pkgs/zefileshard"
 )
 
 func main() {
@@ -10,9 +10,21 @@ func main() {
 
 	const testfile = "testfile.txt"
 
-	rwer, _ := zefiles.New(testfile)
+	/*
+		rwer, _ := zefiles.New(testfile)
 
-	rwer.Read()
-	rwer.Write("Hello another")
+		rwer.Read()
+		rwer.Write("Hello another")
+	*/
+
+	hfile, _ := zefileshard.New(testfile)
+
+	rbytes, err := hfile.Read()
+	if err != nil {
+		fmt.Println("Error")
+	}
+	defer hfile.Close()
+
+	fmt.Printf("%s", rbytes)
 
 }
