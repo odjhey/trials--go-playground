@@ -21,6 +21,8 @@ func main() {
 }
 
 func sendVal(c chan int, v int) {
+
+	fmt.Println("waiting, input is ", v)
 	time.Sleep(2 * time.Second)
 	c <- v
 }
