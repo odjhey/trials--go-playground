@@ -13,3 +13,7 @@ func Call(fn asyncFn) chan interface{} {
 	return c
 
 }
+
+// Qs and Todos
+// 1. Make func type aware with generics
+// 2. Do we have a limit on the number of channels we can create?
