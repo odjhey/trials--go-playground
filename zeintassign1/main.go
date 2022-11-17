@@ -27,13 +27,20 @@ func main() {
 		fmt.Println(err)
 	}
 	fmt.Print("sum is: ", sum, "\n\n")
+
+	fmt.Println("call go(1,\"a\")")
+	sum, err = do(1, "a")
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Print("sum is: ", sum, "\n\n")
 }
 
 func do(values ...interface{}) (int, error) {
 
 	fmt.Println("args", values, "len", len(values))
 	if len(values) != 2 {
-		return 0, errors.New("Please supply more 2 args")
+		return 0, errors.New("Please supply 2 args")
 	}
 
 	var sum = 0
