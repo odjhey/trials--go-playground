@@ -1,18 +1,26 @@
 package worker
 
-type MoneyReceiver interface {
+// someone who spends $$$
+type MoneySpender interface {
+	// monthly expenses of company members
 	GetMonthlyExpenses() int
+	// self explanatory
 	GetName() string
 }
 
+// a permanent employee
 type perm struct {
 	name         string
 	totalPerDiem int
 }
+
+// a contractor
 type contract struct {
 	name             string
 	totalCashAdvance int
 }
+
+// an intern
 type intern struct {
 	name           string
 	totalAllowance int
