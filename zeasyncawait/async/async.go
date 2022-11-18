@@ -1,5 +1,8 @@
 package async
 
+// NOTE! This is just an example to to grok how concurrency works in go
+//       Basing from the assumption that we have existing knowledge of the async/await concepts
+
 type asyncFn func() interface{}
 
 func Call(fn asyncFn) chan interface{} {
@@ -18,6 +21,3 @@ func Call(fn asyncFn) chan interface{} {
 // 1. Make func type aware with generics
 // 2. Do we have a limit on the number of channels we can create?
 // 3. Is creating channels cheap? can we do use it like a regular var
-
-// looks to me like this is a possible usable construct
-// now have to find a good library that achieves the same dev exp

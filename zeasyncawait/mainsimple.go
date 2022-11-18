@@ -18,6 +18,3 @@ func main() {
 
 	fmt.Println(message)
 }
-
-// looks to me like this is a possible construct
-// now we have to find a good library that achieves the same
