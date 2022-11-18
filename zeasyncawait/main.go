@@ -25,7 +25,7 @@ func main() {
 
 	var messages = []interface{}{}
 
-	// simulate await with below construct
+	// simulate await/unwrap with below construct
 	// message := <-promiseLikeChannel
 
 	// call await decending
@@ -37,3 +37,10 @@ func main() {
 		fmt.Println(v)
 	}
 }
+
+// NOTES:
+// promiseLikeChannel is the term used for JS(or other) devs familiar
+// with the concept of Promises/Futures/Tasks have a nicer time
+// i personally go with naming it with what it is in
+// go, a channel, so channel1, channel2,
+//   or channelForMessage, or wrappedValue, or valueInChannel
