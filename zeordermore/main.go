@@ -7,6 +7,7 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
+	"zeordermore/controllers"
 )
 
 func main() {
@@ -19,15 +20,23 @@ func main() {
 
 }
 
+// GET order status
+// POST new order
+// POST new inventory
+// GET inventory
 func start() error {
 
 	shutdown := make(chan os.Signal, 1)
 	signal.Notify(shutdown, syscall.SIGINT)
 
+	mux := http.NewServeMux()
+	mux.HandleFunc("/order", controllers.CreateOrder)
+
 	api := http.Server{
 		Addr:         ":8080",
 		ReadTimeout:  8 * time.Second,
 		WriteTimeout: 8 * time.Second,
+		Handler:      mux,
 	}
 
 	serverError := make(chan error, 1)
