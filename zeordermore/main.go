@@ -20,7 +20,7 @@ func main() {
 
 }
 
-// GET order status
+// GET order
 // POST new order
 // POST new inventory
 // GET inventory

@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net/http"
 	"zeordermore/models"
@@ -9,15 +10,31 @@ import (
 
 func CreateOrder(w http.ResponseWriter, r *http.Request) {
 
-	if r.Method != http.MethodPost {
-		w.WriteHeader(http.StatusNotFound)
-		return
+	orderChan := make(chan models.Order, 1)
+	reqError := make(chan error, 1)
+
+	switch r.Method {
+
+	case http.MethodPost:
+		go func() {
+			ord, _ := models.CreateOrder(nil)
+			orderChan <- ord
+		}()
+
+	default:
+		go func() {
+			reqError <- errors.New("Route Not Found.")
+		}()
 	}
 
-	order, _ := models.CreateOrder(nil)
-	fmt.Printf("Order %+v\n", order)
+	select {
+	case ord := <-orderChan:
+		fmt.Printf("Order %+v\n", ord)
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode(ord)
+	case <-reqError:
+		// TODO: handle more error types later
+		w.WriteHeader(http.StatusNotFound)
+	}
 
-	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(order)
-	return
 }
