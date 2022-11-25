@@ -1,0 +1,12 @@
+
+
+
+GET localhost:8080/food/
+
+POST localhost:8080/food/
+Content-Type: application/json
+
+{
+  "name": "Adobows",
+  "cuisine": "Pinoy"
+}
